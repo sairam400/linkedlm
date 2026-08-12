@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="LinkedLM — your AI copilot for thoughtful LinkedIn content." />
+  <title>LinkedLM — AI LinkedIn Copilot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <a class="brand" href="#" aria-label="LinkedLM home">
+        <span class="brand-mark">L</span><span>Linked<span>LM</span></span>
+      </a>
+
+      <nav class="nav-list">
+        <button class="nav-item active" data-view="create"><span class="nav-icon">✦</span>Create</button>
+        <button class="nav-item" data-view="ideas"><span class="nav-icon">⌁</span>Ideas</button>
+        <button class="nav-item" data-view="library"><span class="nav-icon">▤</span>Library <span class="nav-count" id="libraryCount">3</span></button>
+        <button class="nav-item" data-view="analytics"><span class="nav-icon">↗</span>Analytics</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="usage-card">
+          <div class="usage-head"><span>Monthly credits</span><strong>72%</strong></div>
+          <div class="usage-track"><span></span></div>
+          <p>72 of 100 posts created</p>
+          <button id="upgradeBtn">Upgrade plan <span>→</span></button>
+        </div>
+        <button class="profile-row">
+          <span class="avatar">AR</span>
+          <span><strong>Alex Rivera</strong><small>Creator plan</small></span>
+          <span class="dots">•••</span>
+        </button>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <button class="mobile-menu" aria-label="Toggle menu">☰</button>
+        <div><span class="eyebrow">AI CONTENT STUDIO</span><h1>What will you share today?</h1></div>
+        <div class="top-actions">
+          <button class="icon-btn" aria-label="Notifications">♢<span class="notification-dot"></span></button>
+          <button class="new-post-btn" id="newPostBtn">＋ New post</button>
+        </div>
+      </header>
+
+      <section class="workspace">
+        <div class="composer-column">
+          <div class="composer-card">
+            <div class="card-heading">
+              <div><span class="step-number">01</span><div><h2>Start with your idea</h2><p>Give us a topic, a thought, or a rough draft.</p></div></div>
+              <span class="ai-badge"><i></i>AI ready</span>
+            </div>
+
+            <div class="prompt-wrap">
+              <textarea id="promptInput" maxlength="600" placeholder="e.g. Three lessons I learned building my first startup...">Why curiosity is the most underrated leadership skill</textarea>
+              <div class="prompt-tools">
+                <button class="attach-btn" aria-label="Attach source">⌕ <span>Add source</span></button>
+                <span id="charCount">58 / 600</span>
+              </div>
+            </div>
+
+            <div class="settings-grid">
+              <label>Voice & tone
+                <button class="select-like" id="toneSelect"><span><i class="tone-dot"></i><b>Thoughtful</b></span><span>⌄</span></button>
+                <div class="dropdown" id="toneMenu">
+                  <button data-tone="Thoughtful">Thoughtful</button><button data-tone="Bold">Bold</button><button data-tone="Conversational">Conversational</button><button data-tone="Educational">Educational</button>
+                </div>
+              </label>
+              <label>Post goal
+                <button class="select-like" id="goalSelect"><span><i class="goal-icon">◎</i><b>Build authority</b></span><span>⌄</span></button>
+                <div class="dropdown" id="goalMenu">
+                  <button data-goal="Build authority">Build authority</button><button data-goal="Spark conversation">Spark conversation</button><button data-goal="Share a lesson">Share a lesson</button><button data-goal="Grow my network">Grow my network</button>
+                </div>
+              </label>
+            </div>
+
+            <div class="generate-row">
+              <div class="suggestion"><span>✣</span><p><strong>Quick tip</strong>Specific details make your post feel more human.</p></div>
+              <button class="generate-btn" id="generateBtn"><span>✦</span> Generate post</button>
+            </div>
+          </div>
+
+          <div class="inspiration-section">
+            <div class="section-title"><div><h2>Need a spark?</h2><p>Fresh ideas picked for your audience.</p></div><button id="shuffleBtn">↻ Refresh ideas</button></div>
+            <div class="idea-grid" id="ideaGrid"></div>
+          </div>
+        </div>
+
+        <aside class="preview-column">
+          <div class="preview-heading"><div><span class="step-number">02</span><div><h2>Live preview</h2><p>See it before you share it.</p></div></div><span class="status-dot">Draft</span></div>
+          <div class="post-card">
+            <div class="post-author">
+              <span class="avatar large">AR</span>
+              <div><strong>Alex Rivera</strong><span>Product leader · Building in public</span><small>Just now · ◉</small></div>
+              <b>•••</b>
+            </div>
+            <div class="post-body" id="postBody"></div>
+            <button class="read-more" id="readMore">…more</button>
+            <div class="post-reactions"><span><b class="reaction-icons">● ● ●</b> 128</span><span>24 comments · 6 reposts</span></div>
+            <div class="post-actions"><button>♡ <span>Like</span></button><button>▢ <span>Comment</span></button><button>↻ <span>Repost</span></button><button>➤ <span>Send</span></button></div>
+          </div>
+          <div class="preview-controls">
+            <button id="regenerateBtn">↻ Regenerate</button>
+            <button class="copy-btn" id="copyBtn">▣ Copy post</button>
+          </div>
+          <div class="score-card">
+            <div class="score-ring"><span id="scoreValue">92</span><small>/100</small></div>
+            <div><strong>Strong post potential</strong><p>Clear hook, personal insight, and an engaging question.</p><div class="score-tags"><span>✓ Hook</span><span>✓ Readability</span><span>✓ CTA</span></div></div>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast"><span>✓</span><p><strong>Copied to clipboard</strong><small>Your post is ready to share.</small></p></div>
+  <script src="app.js"></script>
+</body>
+</html>
