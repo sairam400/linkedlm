@@ -1,6 +1,17 @@
 # LinkedLM
 
-An AI-powered LinkedIn writing copilot prototype. It includes a polished responsive dashboard, topic inspiration, tone and goal controls, post generation, regeneration, a LinkedIn-style preview, quality scoring, and copy-to-clipboard.
+I built LinkedLM to make the jump from “I have an idea” to “this is worth posting” a little easier. It is a focused writing workspace for drafting thoughtful LinkedIn posts without losing your own voice.
+
+![LinkedLM product preview](marketing/linkedlm-feature-wide.png)
+
+## What it does
+
+- Turns a rough topic into a structured post
+- Adjusts the draft for tone and intent
+- Suggests prompts when you are staring at a blank page
+- Shows a live LinkedIn-style preview
+- Lets you regenerate or copy a finished draft
+- Works without an API key and supports live OpenAI generation when configured
 
 ## Quick start
 
@@ -12,9 +23,9 @@ Then visit `http://localhost:4173`.
 
 No dependencies are required. The included generator works locally without an API key.
 
-## Enable live AI
+## Optional live AI
 
-Copy `.env.example` to `.env` and set `OPENAI_API_KEY` in your shell or hosting provider. The API key is read only by `server.js` and is never exposed to the browser. You can override the default model with `OPENAI_MODEL`.
+The local generator is useful for trying the interface. For fully dynamic drafts, set `OPENAI_API_KEY` in your shell or hosting provider. The key is read by `server.js` and never sent to the browser. You can override the default model with `OPENAI_MODEL`.
 
 PowerShell example for the current terminal:
 
@@ -37,3 +48,9 @@ Health endpoint: `GET /api/health`
 - `index.html`, `styles.css`, `app.js` — responsive browser UI
 - `server.js` — static server and secure AI endpoint
 - `marketing/` — LinkedIn launch graphics
+
+## Notes
+
+LinkedLM is intentionally small and dependency-free. The browser talks only to the local server, which keeps credentials out of client-side code. Drafts are not stored or uploaded anywhere by the app itself.
+
+If you have an idea for the project, feel free to open an issue.
